@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Agrahari - Full Stack Developer</title>
+    <meta name="description" content="Full Stack Developer with expertise in JavaScript, SQL, and web technologies">
+    <meta name="keywords" content="Web Developer, SQL, JavaScript, PHP, Portfolio">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --bg: #f8f9fa;
+            --text: #2c3e50;
+            --card-bg: #ffffff;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        .dark-mode {
+            --bg: #1a1a1a;
+            --text: #ecf0f1;
+            --card-bg: #2d2d2d;
+            --shadow: rgba(255,255,255,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .sticky-nav {
+            background: var(--card-bg);
+            box-shadow: 0 2px 15px var(--shadow);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary);
+            color: white !important;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            color: white;
+            padding-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary) !important;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill {
+            background: var(--card-bg);
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Resume Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            border-left: 3px solid var(--primary);
+            padding-left: 2rem;
+            margin-left: 1rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background: var(--primary);
+            position: absolute;
+            left: -9px;
+            top: 0;
+            border-radius: 50%;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--card-bg);
+                width: 100%;
+                text-align: center;
+                padding: 2rem 0;
+                transition: 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sticky-nav">
+        <div class="container">
+            <a href="#home" class="logo">Sachin</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#resume">Resume</a>
+                <a href="#contact">Contact</a>
+                <button id="themeToggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles-js" id="particles"></div>
+        <div class="container">
+            <div class="content">
+                <h1 data-aos="fade-up">Sachin Kumar Agrahari</h1>
+                <h2 data-aos="fade-up" data-aos-delay="200">Full Stack Developer</h2>
+                <p data-aos="fade-up" data-aos-delay="400">Passionate about building web solutions with SQL & JavaScript</p>
+                <a href="#projects" class="cta-btn" data-aos="fade-up" data-aos-delay="600">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <img src="WhatsApp Image 2025-05-26 at 21.18.15_a6188ece.jpg" alt="Sachin Kumar Agrahari" data-aos="fade-right">
+                <div class="bio" data-aos="fade-left">
+                    <p>Reconciliation expert transitioning to full-stack development. 1.8+ years experience in finance technology and SQL database management.</p>
+                    <div class="skills">
+                        <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="skill"><i class="fab fa-css3"></i> CSS3</div>
+                        <div class="skill"><i class="fas fa-database"></i> SQL</div>
+                        <div class="skill"><i class="fab fa-php"></i> PHP</div>
+                        <div class="skill"><i class="fas fa-file-excel"></i> Excel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-aos="zoom-in">
+                    <h3>UPI Reconciliation System</h3>
+                    <p>Financial reconciliation system for NPCI transactions</p>
+                    <div class="tech-stack">
+                        <span class="badge">SQL</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">PHP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="cta-btn">View Project</a>
+                    </div>
+                </div>
+                <!-- Add more project cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3>AGS Transact Technologies</h3>
+                    <p class="date">Apr 2023 - Present</p>
+                    <ul>
+                        <li>UPI/IMPS reconciliation expert</li>
+                        <li>SQL database management</li>
+                        <li>ATM dispute resolution</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="resume.pdf" download class="cta-btn">Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div class="social-links">
+                    <a href="https://github.com"><i class="fab fa-github"></i></a>
+                    <a href="mailto:sachinagrahari507@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.querySelector('i').classList.toggle('fa-sun');
+        });
+
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Particles.js Configuration
+        particlesJS('particles', {
+            particles: {
+                number: { value: 80 },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>
